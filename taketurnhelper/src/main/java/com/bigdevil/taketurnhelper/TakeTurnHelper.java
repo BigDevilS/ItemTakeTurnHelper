@@ -183,7 +183,7 @@ public class TakeTurnHelper {
         // 让index为0的子View也有偏移量
         for (int i = 1; i <= mChildCount; i++) {
             // 稍微多偏移一点 不然太丑
-            offset = (mUnitOffset * i - dx) * 1.5f;
+            offset = (mUnitOffset * i - dx) * 1.25f;
             if (offset < mLeftMargin) {
                 offset = mLeftMargin;
             }
