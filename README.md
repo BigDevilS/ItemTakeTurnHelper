@@ -1,6 +1,8 @@
 # ItemTakeTurnHelper
 仿小米下载热榜，ViewPager嵌套RecyclerView实现RecyclerView，切换页面时RecyclerView的Item轮流入场。
 
+支持左右轮流进出场。
+
 添加依赖：
 ```gradle
 allprojects {
