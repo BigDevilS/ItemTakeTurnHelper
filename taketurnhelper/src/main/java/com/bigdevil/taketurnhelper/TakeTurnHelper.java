@@ -17,6 +17,10 @@ import androidx.viewpager.widget.ViewPager;
 import static android.content.Context.WINDOW_SERVICE;
 
 public class TakeTurnHelper {
+    private static final int LEFT = 1;
+
+    private static final int RIGHT = -1;
+
     private RecyclerView mRecyclerView;
 
     private int mRecyclerViewWidth;
@@ -137,25 +141,13 @@ public class TakeTurnHelper {
             mUnitOffset = (mRecyclerViewWidth - mLeftMargin - mRightMargin) / mChildCount;
             mIsDoingAnimation = true;
         }
-        if (mLeft <= mWindowSize.x && mRight >= mWindowSize.x && mIsSupportLeft) {
-            rightToLeft();
-        } else if (mLeft <= 0 && mRight >= 0 && mIsSupportRight) {
-            leftToRight();
+
+        // 这里判断的是去除左右margin后 item进入或退出屏幕才会执行margin
+        if (mLeft + mLeftMargin <= mWindowSize.x && mRight >= mWindowSize.x && mIsSupportLeft) {
+            relayoutChild(mWindowSize.x - mLeft - mLeftMargin, LEFT);
+        } else if (mLeft <= 0 && mRight + mRightMargin >= 0 && mIsSupportRight) {
+            relayoutChild(mRight - mRightMargin, RIGHT);
         }
-    }
-
-    /**
-     * 向左滑动
-     */
-    private void rightToLeft() {
-        relayoutChild(mWindowSize.x - mLeft, true);
-    }
-
-    /**
-     * 向右滑动
-     */
-    private void leftToRight() {
-        relayoutChild(mRight, false);
     }
 
     private boolean shouldDoAnimation() {
@@ -173,27 +165,17 @@ public class TakeTurnHelper {
         }
     }
 
-    private void relayoutChild(int dx, boolean isRightToLeft) {
-        if (dx > mRecyclerViewWidth) {
-            return;
-        }
-
+    private void relayoutChild(int dx, int orientation) {
         float offset;
 
         // 让index为0的子View也有偏移量
         for (int i = 1; i <= mChildCount; i++) {
-            // 稍微多偏移一点 不然太丑
             offset = (mUnitOffset * i - dx) * 1.25f;
-            if (offset < mLeftMargin) {
-                offset = mLeftMargin;
+            if (offset < 0) {
+                offset = 0;
             }
-
-            if (isRightToLeft) {
-                mChildList.get(i - 1).setX(offset);
-            } else {
-                // 反向偏移，需要加上两个marginLeft
-                mChildList.get(i - 1).setX(-offset + 2 * mLeftMargin);
-            }
+            // 左为1 右为-1 在右边要反向偏移
+            mChildList.get(i - 1).setX(offset * orientation + mLeftMargin);
         }
         mRecyclerView.requestLayout();
     }
@@ -204,7 +186,6 @@ public class TakeTurnHelper {
         }
         mRecyclerView.requestLayout();
     }
-
 
     /**
      * 计算出左右的坐标，getGlobalVisibleRect获取的是进入屏幕内的左右坐标
