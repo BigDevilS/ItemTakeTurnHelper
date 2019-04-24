@@ -3,6 +3,8 @@
 
 支持左右轮流进出场。
 
+相关博客：[仿小米下载热榜，RecyclerView item轮流入场](https://www.jianshu.com/p/3f740637189f)
+
 添加依赖：
 ```gradle
 allprojects {
@@ -14,7 +16,7 @@ allprojects {
 
 dependencies {
     ......
-    implementation 'com.github.BigDevilS:ItemTakeTurnHelper:v1.0'
+    implementation 'com.github.BigDevilS:ItemTakeTurnHelper:v1.2'
 }
 ```
 
@@ -32,7 +34,17 @@ dependencies {
     helper.setSupportMode(TakeTurnHelper.Mode.IN);
     helper.setSupportScrollDirection(TakeTurnHelper.ScrollDirection.LEFT);
     helper.setTargetRecyclerView(recyclerView);
-    
+```
+PagerAdapter中：
+```java
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+        TakeTurnHelperProvider.getHelper(container.getContext(), viewPager, position).onDestroy();
+    }
+```
+页面销毁时：
+```
     public void onDestroy() {
       super.onDestroy();
       TakeTurnHelperProvider.onParentDestroy(viewPager);
@@ -60,4 +72,4 @@ setParent(ViewPager parent)|设置外部ViewPager
 setSupportScrollDirection(ScrollDirection scrollDirection)|设置支持的滑动方向（从左到右，从右到左）
 setSupportMode(Mode mode)|设置支持的模式（入场，出场）
 setTargetRecyclerView(RecyclerView targetRecyclerView)|设置内部RecyclerView
-onDestroy()|页面销毁时调用
+onDestroy()|页面销毁/ViewPager回收item时调用
