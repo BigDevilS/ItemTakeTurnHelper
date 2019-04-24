@@ -17,9 +17,9 @@ import androidx.viewpager.widget.ViewPager;
 import static android.content.Context.WINDOW_SERVICE;
 
 public class TakeTurnHelper {
-    private static final int LEFT = 1;
+    private static final int LEFT = -1;
 
-    private static final int RIGHT = -1;
+    private static final int RIGHT = 1;
 
     private RecyclerView mRecyclerView;
 
@@ -41,9 +41,9 @@ public class TakeTurnHelper {
 
     private int mUnitOffset;
 
-    private boolean mIsSupportLeft = true;
+    private boolean mIsSupportLeft;
 
-    private boolean mIsSupportRight;
+    private boolean mIsSupportRight = true;
 
     private boolean mIsSupportIn = true;
 
@@ -77,8 +77,8 @@ public class TakeTurnHelper {
     };
 
     public enum ScrollDirection {
-        LEFT, // 从右到左
-        RIGHT, // 从左到又
+        LEFT, // 左侧
+        RIGHT, // 右侧
         BOTH // 都支持
     }
 
@@ -143,10 +143,10 @@ public class TakeTurnHelper {
         }
 
         // 这里判断的是去除左右margin后 item进入或退出屏幕才会执行margin
-        if (mLeft + mLeftMargin <= mWindowSize.x && mRight >= mWindowSize.x && mIsSupportLeft) {
-            relayoutChild(mWindowSize.x - mLeft - mLeftMargin, LEFT);
-        } else if (mLeft <= 0 && mRight + mRightMargin >= 0 && mIsSupportRight) {
-            relayoutChild(mRight - mRightMargin, RIGHT);
+        if (mLeft + mLeftMargin <= mWindowSize.x && mRight >= mWindowSize.x && mIsSupportRight) {
+            relayoutChild(mWindowSize.x - mLeft - mLeftMargin, RIGHT);
+        } else if (mLeft <= 0 && mRight + mRightMargin >= 0 && mIsSupportLeft) {
+            relayoutChild(mRight - mRightMargin, LEFT);
         }
     }
 
@@ -165,7 +165,7 @@ public class TakeTurnHelper {
         }
     }
 
-    private void relayoutChild(int dx, int orientation) {
+    private void relayoutChild(int dx, int direction) {
         float offset;
 
         // 让index为0的子View也有偏移量
@@ -174,8 +174,8 @@ public class TakeTurnHelper {
             if (offset < 0) {
                 offset = 0;
             }
-            // 左为1 右为-1 在右边要反向偏移
-            mChildList.get(i - 1).setX(offset * orientation + mLeftMargin);
+            // 左为-1 右为1 在左边要反向偏移
+            mChildList.get(i - 1).setX(offset * direction + mLeftMargin);
         }
         mRecyclerView.requestLayout();
     }
