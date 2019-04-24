@@ -28,9 +28,9 @@ public class TakeTurnHelperProvider {
         TakeTurnHelper helper = helpers.get(position);
         if (helper == null) {
             helper = new TakeTurnHelper(context);
-            helper.setParent(parent);
             helpers.put(position, helper);
         }
+        helper.setParent(parent);
         return helper;
     }
 

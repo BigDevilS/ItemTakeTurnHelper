@@ -27,6 +27,8 @@ public class TakeTurnHelper {
 
     private LinearLayoutManager mLayoutManager;
 
+    private ViewPager mParent;
+
     private Point mWindowSize = new Point();
 
     private Rect mBounds = new Rect();
@@ -93,7 +95,8 @@ public class TakeTurnHelper {
     }
 
     public void setParent(ViewPager parent) {
-        parent.addOnPageChangeListener(mViewPagerListener);
+        mParent = parent;
+        mParent.addOnPageChangeListener(mViewPagerListener);
     }
 
     private void doScrollAnimation() {
@@ -234,6 +237,8 @@ public class TakeTurnHelper {
     }
 
     public void onDestroy() {
+        mParent.removeOnPageChangeListener(mViewPagerListener);
+        mParent = null;
         mRecyclerView = null;
         mLayoutManager = null;
         mChildList.clear();
