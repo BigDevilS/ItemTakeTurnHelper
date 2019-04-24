@@ -100,6 +100,10 @@ public class TakeTurnHelper {
     }
 
     private void doScrollAnimation() {
+        if (mRecyclerView == null) {
+            return;
+        }
+
         // 如果被回收了，那么根布局的parent为null,否则为ViewRootImpl
         if (mRecyclerView.getRootView().getParent() == null) {
             return;
