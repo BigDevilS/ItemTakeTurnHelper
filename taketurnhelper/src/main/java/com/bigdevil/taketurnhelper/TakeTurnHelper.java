@@ -51,8 +51,6 @@ public class TakeTurnHelper {
 
     private boolean mIsEntering;
 
-    private boolean mShouldDestroy;
-
     private int mLeftMargin;
 
     private int mRightMargin;
@@ -113,7 +111,6 @@ public class TakeTurnHelper {
             }
             mIsDoingAnimation = false;
             mIsEntering = true;
-            destroyIfNeed();
             return;
         }
 
@@ -123,7 +120,6 @@ public class TakeTurnHelper {
         if (mLeft >= 0 && mRight <= mWindowSize.x) {
             mIsDoingAnimation = false;
             mIsEntering = false;
-            destroyIfNeed();
             return;
         }
 
@@ -237,22 +233,9 @@ public class TakeTurnHelper {
         mLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
     }
 
-    private void destroyIfNeed() {
-        if (mShouldDestroy) {
-            destroy();
-        }
-    }
-
-    private void destroy() {
+    public void onDestroy() {
         mRecyclerView = null;
         mLayoutManager = null;
-    }
-
-    public void onDestroy() {
-        if (mIsDoingAnimation) {
-            mShouldDestroy = true;
-        } else {
-            destroy();
-        }
+        mChildList.clear();
     }
 }
