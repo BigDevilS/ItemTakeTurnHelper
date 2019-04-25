@@ -69,7 +69,7 @@ TakeTurnHelper
 Method|Description
 --|--
 setParent(ViewPager parent)|设置外部ViewPager
-setSupportScrollDirection(ScrollDirection scrollDirection)|设置支持的滑动方向（从左到右，从右到左）
+setSupportScrollDirection(ScrollDirection scrollDirection)|设置支持的滑动方向（左侧，右侧）
 setSupportMode(Mode mode)|设置支持的模式（入场，出场）
 setTargetRecyclerView(RecyclerView targetRecyclerView)|设置内部RecyclerView
 onDestroy()|页面销毁/ViewPager回收item时调用
