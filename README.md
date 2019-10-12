@@ -22,11 +22,12 @@ dependencies {
 
 小米热榜：
 
- ![image](https://github.com/BigDevilS/ItemTakeTurnDemo/blob/master/previews/xiaomirebang.gif)
+ ![image](https://github.com/BigDevilS/ItemTakeTurnHelper/blob/master/previews/xiaomirebang.gif)
+ https://github.com/BigDevilS/ItemTakeTurnHelper/blob/master/previews/fang.gif
 
 仿：
 
- ![image](https://github.com/BigDevilS/ItemTakeTurnDemo/blob/master/previews/fang.gif)
+ ![image](https://github.com/BigDevilS/ItemTakeTurnHelper/blob/master/previews/fang.gif)
  
 使用范例：
 ```java
@@ -51,9 +52,7 @@ PagerAdapter中：
     }
 ```
  
-Demo下载：[app-debug](https://github.com/BigDevilS/ItemTakeTurnDemo/raw/master/app/build/outputs/apk/debug/app-debug.apk)
-
-Demo源码地址：https://github.com/BigDevilS/ItemTakeTurnDemo
+Demo下载：[app-debug](https://github.com/BigDevilS/ItemTakeTurnHelper/raw/master/previews/app-debug.apk)
 
 ## APIs
 
