@@ -1,4 +1,4 @@
-package com.bigdevil.taketurnhelper;
+package com.bigdevil.sample;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.bigdevil.taketurnhelper.TakeTurnHelper;
+import com.bigdevil.taketurnhelper.TakeTurnHelperProvider;
+import com.bigdevil.taketurnhelper.sample.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
     private ViewPager viewPager;

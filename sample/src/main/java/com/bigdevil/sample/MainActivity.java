@@ -1,9 +1,12 @@
-package com.bigdevil.taketurnhelper;
+package com.bigdevil.sample;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import com.bigdevil.taketurnhelper.TakeTurnHelperProvider;
+import com.bigdevil.taketurnhelper.sample.R;
 
 
 public class MainActivity extends AppCompatActivity {

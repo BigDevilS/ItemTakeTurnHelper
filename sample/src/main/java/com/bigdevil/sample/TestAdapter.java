@@ -1,4 +1,4 @@
-package com.bigdevil.taketurnhelper;
+package com.bigdevil.sample;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bigdevil.taketurnhelper.sample.R;
 
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
     private int mColor = Color.BLACK;
