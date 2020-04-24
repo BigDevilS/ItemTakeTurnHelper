@@ -3,8 +3,6 @@
 
 支持左右轮流进出场。
 
-相关博客：[仿小米下载热榜，RecyclerView item轮流入场](https://www.jianshu.com/p/3f740637189f)
-
 添加依赖：
 ```gradle
 allprojects {
